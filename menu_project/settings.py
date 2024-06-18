@@ -15,7 +15,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("DJ_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DJ_DEBUG", default=False)
+print("====>DEBUG:", DEBUG)
 
 ALLOWED_HOSTS = ["*"]
 
