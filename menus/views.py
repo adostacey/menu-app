@@ -9,8 +9,13 @@ class MenuView(ListView):
     template_name = "menu.html"
     context_object_name = "categories"
 
+    def get_queryset(self):
+        slug = self.kwargs.get("slug")
+        rest_id = Restaurant.objects.get(slug=slug)
+        return Category.objects.filter(restaurant=rest_id)
+
     def get_context_data(self, **kwargs) -> dict[str, Any]:
+        slug = self.kwargs.get("slug")
         context = super().get_context_data(**kwargs)
-        context["restaurant"] = "John's Waffle & Pancake House"
+        context["restaurant"] = Restaurant.objects.get(slug=slug)
         return context
-    
