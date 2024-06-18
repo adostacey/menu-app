@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{ restaurant.name }}</h1>
+    <blockquote>
+        {{ restaurant.description }}
+    </blockquote>
+    <p>Restaurant Hours: {{ restaurant.hours_of_operation }}</p>
+    <div class="accordion" id="accordionExample">
+        {% for category in categories %}
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse{{ category.pk }}"
+                            aria-expanded="false"
+                            aria-controls="collapse{{ category.pk }}">{{ category.name }}</button>
+                </h2>
+                <div id="collapse{{ category.pk }}"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        {% if category.description %}<p>{{ category.description }}</p>{% endif %}
+                        <ul class="list-unstyled">
+                            {% for item in category.item_set.all %}
+                                <li>
+                                    <div class="container mb-3">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <h6>{{ item.name }}</h6>
+                                            </div>
+                                            <div class="col-2">
+                                                <h6 class="text-end">${{ item.price_1 }}</h6>
+                                            </div>
+                                        </div>
+                                        {% if item.description %}
+                                            <div class="row">
+                                                <em>{{ item.description }}</em>
+                                            </div>
+                                        {% endif %}
+                                        <hr />
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
