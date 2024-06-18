@@ -3,7 +3,7 @@
     <ul>
         {% for restaurant in restaurants %}
             <li>
-                <a href="#">{{ restaurant.name }}</a>
+                <a href="{{ restaurant.get_absolute_url }}">{{ restaurant.name }}</a>
             </li>
         {% endfor %}
     </ul>
