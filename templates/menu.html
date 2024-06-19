@@ -1,10 +1,18 @@
 {% extends "base.html" %}
+{% block title %}
+    {{ restaurant.name }}
+{% endblock title %}
 {% block content %}
     <h1>{{ restaurant.name }}</h1>
     <blockquote>
         {{ restaurant.description }}
     </blockquote>
     <p>Restaurant Hours: {{ restaurant.hours_of_operation }}</p>
+    {% if restaurant.phone %}
+        <p>
+            Phone: <a href="tel:+{{ restaurant.phone }}">{{ restaurant.phone }}</a>
+        </p>
+    {% endif %}
     <div class="accordion" id="accordionExample">
         {% for category in categories %}
             <div class="accordion-item">
