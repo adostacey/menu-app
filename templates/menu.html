@@ -34,26 +34,43 @@
                                 <li>
                                     <div class="container mb-3">
                                         <div class="row">
-                                            <div class="col-10">
-                                                <h6>{{ item.name }}</h6>
+                                            {% if item.price_2 %}
+                                                <div class="col-8">
+                                                {% else %}
+                                                    <div class="col-10">
+                                                    {% endif %}
+                                                    <h6>{{ item.name }}</h6>
+                                                </div>
+                                                {% if item.price_1 != 0 %}
+                                                    <div class="col-2">
+                                                        <h6 class="text-end">
+                                                            {% if item.price_1_descr %}{{ item.price_1_descr }}:{% endif %}
+                                                            ${{ item.price_1|floatformat:2 }}
+                                                        </h6>
+                                                    </div>
+                                                {% endif %}
+                                                {% if item.price_2 %}
+                                                    <div class="col-2">
+                                                        <h6 class="text-end">
+                                                            {% if item.price_2_descr %}{{ item.price_2_descr }}:{% endif %}
+                                                            ${{ item.price_2 }}
+                                                        </h6>
+                                                    </div>
+                                                {% endif %}
                                             </div>
-                                            <div class="col-2">
-                                                <h6 class="text-end">${{ item.price_1 }}</h6>
-                                            </div>
+                                            {% if item.description %}
+                                                <div class="row">
+                                                    <em>{{ item.description }}</em>
+                                                </div>
+                                            {% endif %}
+                                            <hr />
                                         </div>
-                                        {% if item.description %}
-                                            <div class="row">
-                                                <em>{{ item.description }}</em>
-                                            </div>
-                                        {% endif %}
-                                        <hr />
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
-{% endblock content %}
+            {% endfor %}
+        </div>
+    {% endblock content %}
