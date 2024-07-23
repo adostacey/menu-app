@@ -121,7 +121,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+.env*
 .venv
 venv
 venv-*
@@ -167,3 +167,5 @@ staticfiles/
 
 # other
 scratch.py
+
+docker-compose.yaml
