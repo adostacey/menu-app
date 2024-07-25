@@ -1,8 +1,11 @@
+from typing import Any
 from django.views.generic import ListView
-from menus.models import Restaurant
+from posts.models import Post
 # Create your views here.
 
 class HomeView(ListView):
-    model = Restaurant
+    model = Post
     template_name = "home.html"
-    context_object_name = "restaurants"
+    context_object_name = "posts"
+
+    queryset = Post.objects.all().order_by("-date_created")[:3]
