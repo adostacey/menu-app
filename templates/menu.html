@@ -29,47 +29,45 @@
                      class="accordion-collapse collapse"
                      data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        {% if category.description %}<p>{{ category.description }}</p>{% endif %}
+                        {% if category.description %}<p class="fw-bold">{{ category.description }}</p>{% endif %}
                         <ul class="list-unstyled">
                             {% for item in category.item_set.all %}
                                 <li>
                                     <div class="container mb-3">
                                         <div class="row">
-
-                                                    <div class="col-6">
-                                                    <h6>{{ item.name }}</h6>
-                                                </div>
-                                                {% if item.price_1 != 0 %}
-                                                    <div class="col-6">
-                                                        <h6 class="text-end">
-                                                            {% if item.price_1_descr %}{{ item.price_1_descr }}:{% endif %}
-                                                            ${{ item.price_1|floatformat:2 }}
-                                                        </h6>
-                                                    </div>
-                                                {% endif %}
-                                                
+                                            <div class="col-6">
+                                                <h6>{{ item.name }}</h6>
                                             </div>
-                                            {% if item.price_2 %}
-                                                    <div class="col">
-                                                        <h6 class="text-end">
-                                                            {% if item.price_2_descr %}{{ item.price_2_descr }}:{% endif %}
-                                                            ${{ item.price_2 }}
-                                                        </h6>
-                                                    </div>
-                                                {% endif %}
-                                            {% if item.description %}
-                                                <div class="row">
-                                                    <em>{{ item.description }}</em>
+                                            {% if item.price_1 != 0 %}
+                                                <div class="col-6">
+                                                    <h6 class="text-end">
+                                                        {% if item.price_1_descr %}{{ item.price_1_descr }}:{% endif %}
+                                                        ${{ item.price_1|floatformat:2 }}
+                                                    </h6>
                                                 </div>
                                             {% endif %}
-                                            <hr />
                                         </div>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                                        {% if item.price_2 %}
+                                            <div class="col">
+                                                <h6 class="text-end">
+                                                    {% if item.price_2_descr %}{{ item.price_2_descr }}:{% endif %}
+                                                    ${{ item.price_2 }}
+                                                </h6>
+                                            </div>
+                                        {% endif %}
+                                        {% if item.description %}
+                                            <div class="row">
+                                                <em>{{ item.description }}</em>
+                                            </div>
+                                        {% endif %}
+                                        <hr />
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-    {% endblock content %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
