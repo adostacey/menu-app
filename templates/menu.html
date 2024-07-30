@@ -8,7 +8,10 @@
     <blockquote>
         {{ restaurant.description }}
     </blockquote>
-    <p>Restaurant Hours: {{ restaurant.hours_of_operation }}</p>
+    <p>Restaurant Hours:</p>
+    <ul>
+        {{ restaurant.hours_of_operation|safe }}
+    </ul>
     {% if restaurant.phone %}
         <p>
             Phone: <a href="tel:+{{ restaurant.phone }}">{{ restaurant.phone }}</a>
