@@ -6,7 +6,7 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=75)
     address = models.CharField(max_length=75)
     description = models.TextField(blank=True)
-    hours_of_operation = models.CharField(max_length=200)
+    hours_of_operation = models.TextField(blank=True)
     facebook = models.URLField(blank=True)
     phone = models.CharField(max_length=12, null=True)
     slug = models.SlugField()
