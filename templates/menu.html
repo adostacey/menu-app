@@ -9,7 +9,7 @@
         {{ restaurant.description }}
     </blockquote>
     <p>Restaurant Hours:</p>
-    <ul>
+    <ul class="list-group list-group-flush">
         {{ restaurant.hours_of_operation|safe }}
     </ul>
     {% if restaurant.phone %}
@@ -32,7 +32,7 @@
                      class="accordion-collapse collapse"
                      data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        {% if category.description %}<p class="fw-bold">{{ category.description }}</p>{% endif %}
+                        {% if category.description %}<p class="fw-bold">{{ category.description|safe }}</p>{% endif %}
                         <ul class="list-unstyled">
                             {% for item in category.item_set.all %}
                                 <li>
