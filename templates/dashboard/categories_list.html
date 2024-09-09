@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <h2>{{category.restaurant.name }}</h2>
+        <h3>Categories</h3>
+        {% for category in categories %}
+            <div class="col">
+                <a href="{% url "items-list" category.restaurant.slug category.pk %}">{{ category.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
