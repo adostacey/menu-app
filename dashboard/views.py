@@ -1,5 +1,6 @@
 from typing import Any
 from django.http import Http404
+from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView
@@ -36,7 +37,7 @@ class CreateItemView(LoginRequiredMixin, CreateView):
     model = models.Item
     fields = "__all__"
     template_name = "dashboard/create_item.html"
-    
+
     def get_initial(self):
         initial = super().get_initial()
         category_pk = self.kwargs.get("pk")
@@ -47,3 +48,10 @@ class CreateItemView(LoginRequiredMixin, CreateView):
         except models.Category.DoesNotExist:
             raise Http404("Category does not exist")
         return initial
+
+    def get_success_url(self) -> str:
+        url = reverse(
+            "items-list",
+            kwargs={"slug": self.object.Category.restaurant.slug, "pk": self.kwargs.get("pk")},
+        )
+        return url
