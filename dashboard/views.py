@@ -17,6 +17,11 @@ class RestaurantListView(LoginRequiredMixin, ListView):
 class CategoryListView(LoginRequiredMixin, ListView):
     model = models.Category
     context_object_name = "categories"
+    def get_queryset(self):
+        slug = self.kwargs.get("slug")
+        queryset = models.Category.objects.filter(restaurant__slug=slug)
+        return queryset
+    
 
     template_name = "dashboard/categories_list.html"
 
