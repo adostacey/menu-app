@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load custom_filters %}
 {% block title %}
     {{ restaurant.name }}
 {% endblock title %}
@@ -14,8 +15,11 @@
     </ul>
     {% if restaurant.phone %}
         <p>
-            Phone: <a href="tel:+{{ restaurant.phone }}">{{ restaurant.phone }}</a>
+            <i class="bi-telephone"></i> <a href="tel:+{{ restaurant.phone }}">{{ restaurant.phone|phone_number }}</a>
         </p>
+    {% endif %}
+    {% if restaurant.facebook %}
+    <a class="bi-facebook" href="http://"></a>
     {% endif %}
     <div class="accordion" id="accordionExample">
         {% for category in categories %}
