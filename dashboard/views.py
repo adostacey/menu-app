@@ -15,30 +15,43 @@ class RestaurantListView(LoginRequiredMixin, ListView):
 
 
 class CategoryListView(LoginRequiredMixin, ListView):
+    """Display the categories for the selected restaurant"""
+
     model = models.Category
     context_object_name = "categories"
+
     def get_queryset(self):
         slug = self.kwargs.get("slug")
         queryset = models.Category.objects.filter(restaurant__slug=slug)
         return queryset
-    
 
     template_name = "dashboard/categories_list.html"
 
 
 class ItemListView(LoginRequiredMixin, ListView):
+    """Displays items of the selected category"""
+
     model = models.Item
     template_name = "dashboard/items_list.html"
     context_object_name = "items"
 
+    def get_queryset(self):
+        pk = self.kwargs.get("pk")
+        category = models.Category.objects.get(pk=pk)
+        queryset = models.Item.objects.filter(Category=category)
+        return queryset
+
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get("pk")
+        # adding category details for display purposes
         context["category"] = models.Category.objects.get(pk=pk)
         return context
 
 
 class CreateItemView(LoginRequiredMixin, CreateView):
+    """Create item for the selected category"""
+
     model = models.Item
     fields = "__all__"
     template_name = "dashboard/create_item.html"
@@ -57,6 +70,9 @@ class CreateItemView(LoginRequiredMixin, CreateView):
     def get_success_url(self) -> str:
         url = reverse(
             "items-list",
-            kwargs={"slug": self.object.Category.restaurant.slug, "pk": self.kwargs.get("pk")},
+            kwargs={
+                "slug": self.object.Category.restaurant.slug,
+                "pk": self.kwargs.get("pk"),
+            },
         )
         return url
