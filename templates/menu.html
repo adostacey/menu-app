@@ -15,7 +15,7 @@
     </ul>
     {% if restaurant.phone %}
         <p>
-            <i class="bi-telephone"></i> <a href="tel:+{{ restaurant.phone }}">{{ restaurant.phone|phone_number }}</a>
+            <i class="bi-telephone"></i> <a href="tel:+1{{ restaurant.phone }}">{{ restaurant.phone|phone_number }}</a>
         </p>
     {% endif %}
     {% if restaurant.facebook %}
