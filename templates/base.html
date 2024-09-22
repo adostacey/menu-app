@@ -13,7 +13,8 @@
         </script>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta property="og:title" content="KennEATS" />
+        <meta property="og:title" content="KennEATS: {% block title %}
+            {% endblock title %}" />
         <meta property="og:description"
               content="Convenient mobile friendly menus for restaurants in Kennett, Mo. " />
         <meta property="og:url" content="https://www.kenneats.com" />
@@ -70,6 +71,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/menu/maxim">Maxim Diner</a>
+                            </li>                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="/menu/mrc">Mr. C's</a>
                             </li>
                         </ul>
                     </div>
