@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load custom_filters %}
-{% block meta_tags %}{% restaurant.name%}{% endblock meta_tags %}
+{% block meta_tags %}{{ restaurant.name }}{% endblock meta_tags %}
 {% block title %}
     {{ restaurant.name }}
 {% endblock title %}
