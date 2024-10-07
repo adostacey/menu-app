@@ -16,6 +16,9 @@ class Restaurant(models.Model):
 
     def get_absolute_url(self):
         return reverse("menu", kwargs={"slug": self.slug})
+    
+    class Meta:
+        ordering = ["name"]
 
 
 class Category(models.Model):
@@ -40,6 +43,8 @@ class Item(models.Model):
     price_1_descr = models.CharField(max_length=50, blank=True)
     price_2 = models.FloatField(null=True, blank=True)
     price_2_descr = models.CharField(max_length=50, blank=True)
+    price_3 = models.FloatField(null=True, blank=True)
+    price_3_descr = models.CharField(max_length=50, blank=True)
 
     class Meta:
         ordering = ["name"]
