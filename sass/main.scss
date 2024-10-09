@@ -1,0 +1,19 @@
+$primary: #f3d31b;
+$secondary: #262626;
+$light: #fbfafd;
+$dark: #3b3b3b;
+
+$navbar-dark-color: $primary; // slide-in text
+$navbar-dark-brand-color: $primary; // navbar title
+$navbar-dark-active-color: $light; // title hover
+
+$accordion-color: $light; // text
+$accordion-bg: $secondary; // bg
+$accordion-border-color: $dark;
+$accordion-button-color: $primary;
+$accordion-icon-color: $primary;
+
+$btn-close-color: $primary;
+//$btn-close-bg:
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';

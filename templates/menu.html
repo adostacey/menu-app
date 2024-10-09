@@ -1,27 +1,27 @@
 {% extends "base.html" %}
 {% load custom_filters %}
-{% block meta_tags %}{{ restaurant.name }}{% endblock meta_tags %}
+{% block meta_tags %}
+    {{ restaurant.name }}
+{% endblock meta_tags %}
 {% block title %}
     {{ restaurant.name }}
 {% endblock title %}
 {% block content %}
     <p class="bg-info text-center p-2">All restaurant pricings are subject to change without notice.</p>
-    <h1>{{ restaurant.name }}</h1>
-    <blockquote>
+    <h1 class="text-primary">{{ restaurant.name }}</h1>
+    <blockquote class="text-light">
         {{ restaurant.description }}
     </blockquote>
-    <p>Restaurant Hours:</p>
-    <ul class="list-group list-group-flush">
+    <p class="text-light">Restaurant Hours:</p>
+    <ul class="list-group list-group-flush text-light">
         {{ restaurant.hours_of_operation|safe }}
     </ul>
     {% if restaurant.phone %}
         <p>
-            <i class="bi-telephone"></i> <a href="tel:+1{{ restaurant.phone }}">{{ restaurant.phone|phone_number }}</a>
+            <i class="bi-telephone text-primary"></i> <a href="tel:+1{{ restaurant.phone }}">{{ restaurant.phone|phone_number }}</a>
         </p>
     {% endif %}
-    {% if restaurant.facebook %}
-    <a class="bi-facebook" href="{{ restaurant.facebook }}"></a>
-    {% endif %}
+    {% if restaurant.facebook %}<a class="bi-facebook" href="{{ restaurant.facebook }}"></a>{% endif %}
     <div class="accordion" id="accordionExample">
         {% for category in categories %}
             <div class="accordion-item">
@@ -41,41 +41,40 @@
                         <ul class="list-unstyled">
                             {% for item in category.item_set.all %}
                                 <li>
-                                    <div class="container mb-3">
+                                    <div class="container">
                                         <div class="row">
-                                            <div class="col-6">
-                                                <h6>{{ item.name }}</h6>
+                                            <div class="col">
+                                                <h5 class="text-primary">{{ item.name }}</h5>
+                                                <div class="">{{ item.description }}</div>
                                             </div>
-                                            {% if item.price_1 != 0 %}
-                                                <div class="col-6">
-                                                    <h6 class="text-end">
+                                            <div class="col-3">
+                                                <div class="text-primary text-end">
+                                                    {% if item.price_1 %}
                                                         {% if item.price_1_descr %}{{ item.price_1_descr }}:{% endif %}
                                                         ${{ item.price_1|floatformat:2 }}
-                                                    </h6>
+                                                    {% endif %}
                                                 </div>
-                                            {% endif %}
+                                                <div class="text-primary text-end">
+                                                    {% if item.price_2 %}
+                                                        {% if item.price_2_descr %}{{ item.price_2_descr }}:{% endif %}
+                                                        ${{ item.price_2|floatformat:2 }}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="text-primary text-end">
+                                                    {% if item.price_3 %}
+                                                        {% if item.price_3_descr %}{{ item.price_3_descr }}:{% endif %}
+                                                        ${{ item.price_3|floatformat:2 }}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
                                         </div>
-                                        {% if item.price_2 %}
-                                            <div class="col">
-                                                <h6 class="text-end">
-                                                    {% if item.price_2_descr %}{{ item.price_2_descr }}:{% endif %}
-                                                    ${{ item.price_2 }}
-                                                </h6>
-                                            </div>
-                                        {% endif %}
-                                        {% if item.description %}
-                                            <div class="row">
-                                                <em>{{ item.description }}</em>
-                                            </div>
-                                        {% endif %}
-                                        <hr />
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                                        <hr class="text-primary" />
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
-{% endblock content %}
+            {% endfor %}
+        </div>
+    {% endblock content %}
